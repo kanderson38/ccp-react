@@ -1,0 +1,13 @@
+li {
+  min-height: 55px;
+  font-size: 1em;
+
+  span {
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+
+  button.open-form-button {
+    float: right;
+  }
+}

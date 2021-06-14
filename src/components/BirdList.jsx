@@ -1,28 +1,27 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import './BirdList.scss';
+import BirdItem from './BirdItem';
 
 function BirdList(props) {
   function parentsItems() {
     return (
       <ul>
-        <li>
-          Mother:
-          {props.motherBird.phenotype}
-          <button type="button" onClick={() => console.log('done')}>Change</button>
-        </li>
-        <li>
-          Father:
-          {props.fatherBird.phenotype}
-          <button type="button" onClick={() => console.log('Fine')}>Change</button>
-        </li>
+        <BirdItem
+          prefix='Mother: '
+          bird={props.motherBird}
+          handleEditButtonClick={props.handleEditButtonClick}
+        />
+        <BirdItem
+          prefix='Father: '
+          bird={props.fatherBird}
+          handleEditButtonClick={props.handleEditButtonClick}
+        />
       </ul>
     );
   }
   return (
-    <div id="birdlist">
-      <ul>
-        {parentsItems()}
-      </ul>
+    <div id='birdlist'>
+      <ul>{parentsItems()}</ul>
       {/* <ul>
           {chicksItems()}
         </ul> */}
@@ -31,7 +30,3 @@ function BirdList(props) {
 }
 
 export default BirdList;
-BirdList.propTypes = {
-  fatherBird: PropTypes.objectOf(PropTypes.object).isRequired,
-  motherBird: PropTypes.objectOf(PropTypes.object).isRequired,
-};

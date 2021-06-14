@@ -1,0 +1,35 @@
+@import './lib/shared/colors';
+
+body {
+  margin: 0;
+  font-family: 'Raleway', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: $cockatiel-bg-color;
+}
+
+header {
+  background-color: $cockatiel-dark-brown;
+  text-align: center;
+  color: $cockatiel-creamface-cheek-yellow;
+  padding: 18px 0;
+
+  p {
+    margin-bottom: 0px;
+  }
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 1.5em;
+  margin: 0px;
+}
+
+.hidden {
+  display: none;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}

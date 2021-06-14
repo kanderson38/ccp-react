@@ -1,16 +1,13 @@
 function SetBirdPage(props) {
-  console.log(props);
-  let {bird, setBirdFunction, showPage} = {...props};
-  if (!bird) {
-    bird = {phenotype: "Normal grey"}
-  }
+  let { bird } = { ...props };
+
   return (
     <div>
-      <p>{bird.phenotype}</p>
-      <button onClick={() => setBirdFunction({phenotype: "Cinnamon"})}>Change type</button>
-      <button onClick={() => showPage(false)}>Return</button>
+      <p>{bird.genotypeInWords}</p>
+      <button onClick={() => console.log('do it')}>Change type</button>
+      <button onClick={() => console.log('ok')}>Return</button>
     </div>
-  )
+  );
 }
 
 export default SetBirdPage;
