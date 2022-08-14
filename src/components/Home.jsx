@@ -6,27 +6,46 @@ import Cockatiel from '../lib/Cockatiel';
 
 function Home() {
   const [motherBird, setMotherBird] = useState(
-    new Cockatiel('female', 'Cinnamon'),
+    new Cockatiel('female', 'Mother:'),
   );
-  const [fatherBird, setFatherBird] = useState(new Cockatiel('male', 'silver'));
+  const [fatherBird, setFatherBird] = useState(
+    new Cockatiel('male', 'Father:'),
+  );
   const [showSetBirdPage, setShowSetBirdPage] = useState(false);
-  const [whichBirdToEdit, setWhichBirdToEdit] = useState();
-  useEffect(() => {
-    console.log(whichBirdToEdit);
-    if (whichBirdToEdit) {
-      setShowSetBirdPage(true);
-    }
-  }, [whichBirdToEdit]);
+  const [whichBirdToEdit, setWhichBirdToEdit] = useState(fatherBird);
 
   return (
     <main>
       <div className='main-birdlist'>
         <BirdList
-          motherBird={motherBird}
-          fatherBird={fatherBird}
-          handleEditButtonClick={setWhichBirdToEdit}
+          birdsAndActions={[
+            {
+              bird: motherBird,
+              buttonAction: (e) => {
+                console.log('buttonAction', e);
+                setShowSetBirdPage(true);
+                setWhichBirdToEdit(e);
+              },
+            },
+            {
+              bird: fatherBird,
+              buttonAction: (e) => {
+                console.log('buttonAction', e);
+                setShowSetBirdPage(true);
+                setWhichBirdToEdit(e);
+              },
+            },
+          ]}
+          headerText='Parents'
         />
-        {showSetBirdPage && <SetBirdPage bird={whichBirdToEdit} />}
+        <SetBirdPage
+          bird={whichBirdToEdit}
+          open={showSetBirdPage}
+          showFunction={setShowSetBirdPage}
+          setFunction={
+            whichBirdToEdit.gender === 'male' ? setFatherBird : setMotherBird
+          }
+        />
       </div>
     </main>
   );

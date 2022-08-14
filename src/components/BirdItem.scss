@@ -1,6 +1,16 @@
+@import '../lib/styles/colors.scss';
+
 li {
   min-height: 55px;
   font-size: 1em;
+  padding: 10px 18px;
+
+  div.list-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+  }
 
   span {
     display: inline-block;
@@ -8,6 +18,9 @@ li {
   }
 
   button.open-form-button {
-    float: right;
+    color: $cockatiel-creamface-yellow;
+    background-color: $cockatiel-dark-brown;
+    border: 0;
+    border-radius: 4px;
   }
 }

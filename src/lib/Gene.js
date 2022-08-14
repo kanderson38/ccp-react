@@ -1,8 +1,8 @@
 export default class Gene {
-  constructor(names, inheritanceMode) {
+  constructor(names, inheritanceMode, isFemale = true) {
     this.names = names;
     this.inheritanceMode = inheritanceMode;
-    this.genePair = '--';
+    this.genePair = isFemale && inheritanceMode === 'sex-linked' ? '-Y' : '--';
   }
 
   get splitsAndVisuals() {

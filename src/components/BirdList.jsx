@@ -4,19 +4,22 @@ import BirdItem from './BirdItem';
 
 function BirdList(props) {
   function parentsItems() {
+    const birdsList = props.birdsAndActions.map((item, index) => {
+      return (
+        <BirdItem
+          bird={item.bird}
+          key={index}
+          handleEditButtonClick={item.buttonAction}
+        />
+      );
+    });
     return (
-      <ul>
-        <BirdItem
-          prefix='Mother: '
-          bird={props.motherBird}
-          handleEditButtonClick={props.handleEditButtonClick}
-        />
-        <BirdItem
-          prefix='Father: '
-          bird={props.fatherBird}
-          handleEditButtonClick={props.handleEditButtonClick}
-        />
-      </ul>
+      <>
+        <div className='header'>
+          <h2 className='listHeader'>{props.headerText}</h2>
+        </div>
+        <ul>{birdsList}</ul>
+      </>
     );
   }
   return (

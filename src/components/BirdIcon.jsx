@@ -4,7 +4,7 @@ import './BirdIcon.scss';
 function BirdIcon(props) {
   return (
     <>
-      <div className={`${props.mutations} birdrect`}>
+      <div className={`${props.mutations.join(' ')} birdrect`}>
         <div className='face'></div>
         <div className='eye'></div>
         <div className='cheek'></div>
