@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import BirdList from './BirdList';
 import './Radiogroup.scss';
 
 function Radiogroup(props) {
   const { gene, gender, setGeneFunction } = props;
   const [checkedValue, setCheckedValue] = useState(gene.genePair);
+  const [singleGenes, setSingleGenes] = useState(gene.genePair.split(''));
+
+  function handleParblueClick(e, index) {
+    const geneArray = [...singleGenes];
+    geneArray[index] = e.currentTarget.value;
+    if (geneArray[1] < geneArray[0]) {
+      geneArray[1] = geneArray[0];
+    }
+    setGeneFunction('parblue', geneArray.join(''));
+    setSingleGenes([...geneArray]);
+  }
 
   function handleInputClick(e) {
-    console.log('lid', e);
     setGeneFunction(
       gene.names[0].replace(' ', '-').toLowerCase(),
       e.currentTarget.value,
@@ -24,18 +33,18 @@ function Radiogroup(props) {
             <input
               type='radio'
               id={`visual-button-${gene.names[0]}`}
-              value='00'
+              value='11'
               onChange={handleInputClick}
-              checked={checkedValue === '00'}
+              checked={checkedValue === '11'}
               name={`radiogroup-${gene.names[0]}`}
             ></input>
             <label htmlFor={`visual-button-${gene.names[0]}`}>Visual</label>
             <input
               type='radio'
               id={`split-button-${gene.names[0]}`}
-              value='0-'
+              value='10'
               onChange={handleInputClick}
-              checked={checkedValue === '0-'}
+              checked={checkedValue === '10'}
               name={`radiogroup-${gene.names[0]}`}
             ></input>
             <label htmlFor={`split-button-${gene.names[0]}`}>Split</label>
@@ -43,9 +52,9 @@ function Radiogroup(props) {
             <input
               type='radio'
               id={`none-button-${gene.names[0]}`}
-              value='--'
+              value='00'
               onChange={handleInputClick}
-              checked={checkedValue === '--'}
+              checked={checkedValue === '00'}
               name={`radiogroup-${gene.names[0]}`}
             ></input>
             <label htmlFor={`none-button-${gene.names[0]}`}>None</label>
@@ -61,9 +70,9 @@ function Radiogroup(props) {
             <input
               type='radio'
               id={`visual-button-${gene.names[0]}`}
-              value={gender === 'female' ? '0Y' : '00'}
+              value={gender === 'female' ? '1Y' : '11'}
               onChange={handleInputClick}
-              checked={checkedValue === '0Y' || checkedValue === '00'}
+              checked={checkedValue === '1Y' || checkedValue === '11'}
               name={`radiogroup-${gene.names[0]}`}
             ></input>
             <label htmlFor={`visual-button-${gene.names[0]}`}>Visual</label>
@@ -72,9 +81,9 @@ function Radiogroup(props) {
                 <input
                   type='radio'
                   id={`splitX1-button-${gene.names[0]}`}
-                  value='0-'
+                  value='10'
                   onChange={handleInputClick}
-                  checked={checkedValue === '0-'}
+                  checked={checkedValue === '10'}
                   name={`radiogroup-${gene.names[0]}`}
                 ></input>
                 <label htmlFor={`splitX1-button-${gene.names[0]}`}>
@@ -83,9 +92,9 @@ function Radiogroup(props) {
                 <input
                   type='radio'
                   id={`splitX2-button-${gene.names[0]}`}
-                  value='-0'
+                  value='01'
                   onChange={handleInputClick}
-                  checked={checkedValue === '-0'}
+                  checked={checkedValue === '01'}
                   name={`radiogroup-${gene.names[0]}`}
                 ></input>
                 <label htmlFor={`splitX2-button-${gene.names[0]}`}>
@@ -98,8 +107,8 @@ function Radiogroup(props) {
             <input
               type='radio'
               id={`none-button-${gene.names[0]}`}
-              value={gender === 'female' ? '-Y' : '--'}
-              checked={checkedValue === '-Y' || checkedValue === '--'}
+              value={gender === 'female' ? '0Y' : '00'}
+              checked={checkedValue === '0Y' || checkedValue === '00'}
               onChange={handleInputClick}
               name={`radiogroup-${gene.names[0]}`}
             ></input>
@@ -109,7 +118,133 @@ function Radiogroup(props) {
       );
     }
     case 'parblue': {
-      return '';
+      return (
+        <li>
+          <h2>Parblue (Pastelface, Creamface, Whiteface)</h2>
+          <p>Gene 1 (phenotype)</p>
+          <div role='radiogroup' className='radiogroup-container'>
+            <input
+              type='radio'
+              id={`none-button`}
+              value='0'
+              onChange={(e) => handleParblueClick(e, 0)}
+              checked={singleGenes[0] === '0'}
+              name={`radiogroup-parblue1`}
+            ></input>
+            <label htmlFor={`none-button`}>None</label>
+            <input
+              type='radio'
+              id={`visual-button-${gene.names[0]}`}
+              value='1'
+              onChange={(e) => handleParblueClick(e, 0)}
+              checked={singleGenes[0] === '1'}
+              name={`radiogroup-parblue1`}
+            ></input>
+            <label htmlFor={`visual-button-${gene.names[0]}`}>PF</label>
+            <input
+              type='radio'
+              id={`visual-button-${gene.names[1]}`}
+              value='2'
+              onChange={(e) => handleParblueClick(e, 0)}
+              checked={singleGenes[0] === '2'}
+              name={`radiogroup-parblue1`}
+            ></input>
+            <label htmlFor={`visual-button-${gene.names[1]}`}>CF</label>
+            <input
+              type='radio'
+              id={`visual-button-${gene.names[2]}`}
+              value='3'
+              onChange={(e) => handleParblueClick(e, 0)}
+              checked={singleGenes[0] === '3'}
+              name={`radiogroup-parblue1`}
+            ></input>
+            <label htmlFor={`visual-button-${gene.names[2]}`}>WF</label>
+          </div>
+          <p>Gene 2</p>
+          <div role='radiogroup' className='radiogroup-container'>
+            <input
+              type='radio'
+              id={`none-button2`}
+              value='0'
+              onChange={(e) => handleParblueClick(e, 1)}
+              checked={singleGenes[1] === '0'}
+              disabled={singleGenes[0] > 0}
+              name={`radiogroup-parblue2`}
+            ></input>
+            <label htmlFor={`none-button2`}>None</label>
+            <input
+              type='radio'
+              id={`visual-button-${gene.names[0]}2`}
+              value='1'
+              onChange={(e) => handleParblueClick(e, 1)}
+              checked={singleGenes[1] === '1'}
+              disabled={singleGenes[0] > 1}
+              name={`radiogroup-parblue2`}
+            ></input>
+            <label htmlFor={`visual-button-${gene.names[0]}2`}>PF</label>
+            <input
+              type='radio'
+              id={`visual-button-${gene.names[1]}2`}
+              value='2'
+              onChange={(e) => handleParblueClick(e, 1)}
+              checked={singleGenes[1] === '2'}
+              disabled={singleGenes[0] > 2}
+              name={`radiogroup-parblue2`}
+            ></input>
+            <label htmlFor={`visual-button-${gene.names[1]}2`}>CF</label>
+            <input
+              type='radio'
+              id={`visual-button-${gene.names[2]}2`}
+              value='3'
+              onChange={(e) => handleParblueClick(e, 1)}
+              checked={singleGenes[1] === '3'}
+              name={`radiogroup-parblue2`}
+            ></input>
+            <label htmlFor={`visual-button-${gene.names[2]}2`}>WF</label>
+          </div>
+        </li>
+      );
+    }
+    case 'dominant': {
+      return (
+        <li>
+          <h2>{gene.names}</h2>
+          <div role='radiogroup' className='radiogroup-container'>
+            <input
+              type='radio'
+              id={`visual-button-${gene.names[0]}`}
+              value='11'
+              onChange={handleInputClick}
+              checked={checkedValue === '11'}
+              name={`radiogroup-${gene.names[0]}`}
+            ></input>
+            <label htmlFor={`visual-button-${gene.names[0]}`}>
+              Double Factor
+            </label>
+            <input
+              type='radio'
+              id={`split-button-${gene.names[0]}`}
+              value='10'
+              onChange={handleInputClick}
+              checked={checkedValue === '10'}
+              name={`radiogroup-${gene.names[0]}`}
+            ></input>
+            <label htmlFor={`split-button-${gene.names[0]}`}>
+              Single Factor
+            </label>
+
+            <input
+              type='radio'
+              id={`none-button-${gene.names[0]}`}
+              value='00'
+              onChange={handleInputClick}
+              checked={checkedValue === '00'}
+              name={`radiogroup-${gene.names[0]}`}
+            ></input>
+            <label htmlFor={`none-button-${gene.names[0]}`}>None</label>
+          </div>
+        </li>
+      );
     }
     default: {
       return '';

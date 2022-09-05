@@ -100,34 +100,6 @@
   }
 }
 
-.creamface {
-  .cheek {
-    background-color: $cockatiel-creamface-cheek-yellow;
-  }
-  .face,
-  .pied-pattern,
-  .pied-pattern:before {
-    background-color: $cockatiel-creamface-yellow;
-  }
-  .pearl-pattern {
-    box-shadow: 5px 0 0 0 $cockatiel-creamface-yellow;
-  }
-}
-
-.pastelface {
-  .cheek {
-    background-color: $cockatiel-pastelface-cheek;
-  }
-  .face,
-  .pied-pattern,
-  .pied-pattern:before {
-    background-color: $cockatiel-creamface-cheek-yellow;
-  }
-  .pearl-pattern {
-    box-shadow: 5px 0 0 0 $cockatiel-creamface-cheek-yellow;
-  }
-}
-
 .cinnamon {
   &.birdrect {
     background-color: $cockatiel-cinnamon;
@@ -215,5 +187,33 @@
 
   .pearl-pattern {
     box-shadow: 5px 0 0 0 white;
+  }
+}
+
+.creamface {
+  .cheek {
+    background-color: $cockatiel-creamface-cheek-yellow;
+  }
+  .face,
+  .pied-pattern,
+  .pied-pattern:before {
+    background-color: $cockatiel-creamface-yellow;
+  }
+  .pearl-pattern {
+    box-shadow: 5px 0 0 0 $cockatiel-creamface-yellow;
+  }
+}
+
+.pastelface {
+  .cheek {
+    background-color: $cockatiel-pastelface-cheek;
+  }
+  .face,
+  .pied-pattern,
+  .pied-pattern:before {
+    background-color: $cockatiel-creamface-cheek-yellow;
+  }
+  .pearl-pattern {
+    box-shadow: 5px 0 0 0 $cockatiel-creamface-cheek-yellow;
   }
 }

@@ -2,7 +2,7 @@ export default class Gene {
   constructor(names, inheritanceMode, isFemale = true) {
     this.names = names;
     this.inheritanceMode = inheritanceMode;
-    this.genePair = isFemale && inheritanceMode === 'sex-linked' ? '-Y' : '--';
+    this.genePair = isFemale && inheritanceMode === 'sex-linked' ? '0Y' : '00';
   }
 
   get splitsAndVisuals() {
@@ -11,14 +11,31 @@ export default class Gene {
     let classes = [];
 
     const genes = this.genePair.split('');
-    if (genes[0] !== genes[1] && genes[1] !== 'Y') {
+    if (this.inheritanceMode === 'dominant') {
+      let descriptiveText = '';
+      if (genes[0] === genes[1] && genes[0] !== '0') {
+        descriptiveText = `${this.displayName(0)} (double factor)`;
+      } else if (genes[0] !== genes[1]) {
+        descriptiveText = `${this.displayName(0)} (single factor)`;
+      }
+      descriptiveText && visuals.push(descriptiveText);
+      descriptiveText &&
+        classes.push(this.displayName(0).replace(' ', '-').toLowerCase());
+    } else if (genes[0] !== genes[1] && genes[1] !== 'Y') {
       genes.forEach((gene) => {
-        if (gene !== '-') {
-          splits.push(this.displayName(parseInt(gene)));
+        if (gene !== '0') {
+          splits.push(this.displayName(parseInt(gene, 10) - 1));
+          if (this.inheritanceMode === 'parblue') {
+            classes.push(
+              this.displayName(parseInt(gene, 10) - 1)
+                .replace(' ', '-')
+                .toLowerCase(),
+            );
+          }
         }
       });
-    } else if (genes[0] !== '-') {
-      let visualName = this.displayName(parseInt(genes[0]));
+    } else if (genes[0] !== '0') {
+      let visualName = this.displayName(parseInt(genes[0]) - 1);
       visuals.push(visualName);
       classes.push(visualName.replace(' ', '-').toLowerCase());
     }

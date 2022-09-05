@@ -35,7 +35,7 @@ function SetBirdPage(props) {
             showFunction(false);
           }}
         >
-          Return
+          Save
         </button>
       </div>
     )

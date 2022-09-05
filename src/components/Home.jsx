@@ -3,6 +3,7 @@ import './Home.scss';
 import SetBirdPage from './SetBirdPage';
 import BirdList from './BirdList';
 import Cockatiel from '../lib/Cockatiel';
+import Pair from '../lib/Pair';
 
 function Home() {
   const [motherBird, setMotherBird] = useState(
@@ -11,6 +12,16 @@ function Home() {
   const [fatherBird, setFatherBird] = useState(
     new Cockatiel('male', 'Father:'),
   );
+  const newPair = new Pair(motherBird, fatherBird);
+  const { femaleChicks, maleChicks } = newPair.breed();
+  const formattedFemaleChicks = [];
+  const formattedMaleChicks = [];
+  for (const chick of femaleChicks) {
+    formattedFemaleChicks.push({ bird: chick });
+  }
+  for (const chick of maleChicks) {
+    formattedMaleChicks.push({ bird: chick });
+  }
   const [showSetBirdPage, setShowSetBirdPage] = useState(false);
   const [whichBirdToEdit, setWhichBirdToEdit] = useState(fatherBird);
 
@@ -22,7 +33,6 @@ function Home() {
             {
               bird: motherBird,
               buttonAction: (e) => {
-                console.log('buttonAction', e);
                 setShowSetBirdPage(true);
                 setWhichBirdToEdit(e);
               },
@@ -30,13 +40,20 @@ function Home() {
             {
               bird: fatherBird,
               buttonAction: (e) => {
-                console.log('buttonAction', e);
                 setShowSetBirdPage(true);
                 setWhichBirdToEdit(e);
               },
             },
           ]}
           headerText='Parents'
+        />
+        <BirdList
+          birdsAndActions={formattedFemaleChicks}
+          headerText='Female Chicks'
+        />
+        <BirdList
+          birdsAndActions={formattedMaleChicks}
+          headerText='Male Chicks'
         />
         <SetBirdPage
           bird={whichBirdToEdit}

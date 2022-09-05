@@ -22,7 +22,7 @@ export default class Cockatiel {
       olive: new Gene(['Olive'], 'recessive', this.gender === 'female'),
       fallow: new Gene(['Fallow'], 'recessive', this.gender === 'female'),
       parblue: new Gene(
-        ['Creamface', 'Pastelface', 'Whiteface'],
+        ['Pastelface', 'Creamface', 'Whiteface'],
         'parblue',
         this.gender === 'female',
       ),
@@ -37,6 +37,7 @@ export default class Cockatiel {
         this.gender === 'female',
       ),
     };
+    this.frequency = 1;
   }
 
   get genotypeInWords() {
@@ -46,7 +47,14 @@ export default class Cockatiel {
     for (const gene in this.genotype) {
       const results = this.genotype[gene].splitsAndVisuals;
       if (results.splits.length) {
-        splitsArray.push([...results.splits]);
+        for (const split of results.splits) {
+          splitsArray.push(split);
+        }
+        if (gene === 'parblue') {
+          for (const className of results.classes) {
+            classes.push(className);
+          }
+        }
       }
       if (results.visuals.length) {
         visualsArray.push([...results.visuals]);
@@ -56,7 +64,6 @@ export default class Cockatiel {
     if (!visualsArray.length) {
       visualsArray.push('Normal grey');
     }
-    console.log('classes', classes);
     return {
       genotype: `${visualsArray.join(' ')} ${
         splitsArray.length ? 'split to' : ''
